@@ -20,14 +20,14 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
- * {@link Exception} intended to use to expose an HTTP status and reason
+ * {@link RuntimeException} intended to use to expose an HTTP status and reason
  * to {@link ExceptionHandler @ExceptionHandler}.
  *
  * @author Ilya Nikolaev
  * @see ExceptionHandler
  * @since 1.0
  */
-public class ApiException extends Exception {
+public class ApiException extends RuntimeException {
     private final HttpStatusCode status;
     private final String reason;
 
