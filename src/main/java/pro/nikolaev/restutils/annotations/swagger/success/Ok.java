@@ -18,6 +18,7 @@ package pro.nikolaev.restutils.annotations.swagger.success;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.core.annotation.AliasFor;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,5 +47,6 @@ import java.lang.annotation.*;
 @ApiResponse(responseCode = "200", description = "Успешно", useReturnTypeSchema = true)
 @Documented
 public @interface Ok {
+    @AliasFor(annotation = ApiResponse.class, attribute = "content")
     Content[] content() default {};
 }
