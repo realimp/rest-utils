@@ -38,7 +38,7 @@ import java.lang.annotation.*;
  * according to {@link ApiError} schema description and will use
  * a predefined example.
  *
- * <p><b>NOTE:</b> {@code @OkWithResource} is processed if annotated method
+ * <p><b>NOTE:</b> {@code @PayloadTooLarge} is processed if annotated method
  * is part of properly configured {@link RestController} and
  * <a href="https://springdoc.org">{@code springdoc-openapi}</a> library.
  *

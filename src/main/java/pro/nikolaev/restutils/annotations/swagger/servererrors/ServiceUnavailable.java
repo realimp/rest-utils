@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 the original author or authors.
+ * Copyright (c) 2024 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package pro.nikolaev.restutils.annotations.swagger.clienterrors;
+package pro.nikolaev.restutils.annotations.swagger.servererrors;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -33,12 +33,12 @@ import java.lang.annotation.*;
  * {@link ApiResponse @ApiResponse}.
  *
  * <p>Methods that carry this annotation will be included in generated
- * openApi documentation with predefined HTTP status code 422.
+ * openApi documentation with predefined HTTP status code 503.
  * {@link ResponseBody @ResponseBody} description will be generated
  * according to {@link ApiError} schema description and will use
  * a predefined example.
  *
- * <p><b>NOTE:</b> {@code @UnprocessableContent} is processed if annotated method
+ * <p><b>NOTE:</b> {@code @ServiceUnavailable} is processed if annotated method
  * is part of properly configured {@link RestController} and
  * <a href="https://springdoc.org">{@code springdoc-openapi}</a> library.
  *
@@ -47,19 +47,18 @@ import java.lang.annotation.*;
  * @see ResponseEntity
  * @see RestController
  * @see ApiError
- * @since 1.0
+ * @since 1.0.4
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE, ElementType.ANNOTATION_TYPE})
-@ApiResponse(responseCode = "422", description = "Невозможно выполнить",
+@Target({ElementType.METHOD})
+@ApiResponse(responseCode = "503", description = "Сервис не доступен",
         content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                 examples = @ExampleObject("""
                         {
-                          "message": "Невозможно выполнить",
-                          "details": "Ресурс в данный момент редактируется другим пользователем"
+                          "message": "Сервис не доступен"
                         }
                         """),
                 schema = @Schema(implementation = ApiError.class)))
 @Documented
-public @interface UnprocessableContent {
+public @interface ServiceUnavailable {
 }

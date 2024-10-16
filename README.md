@@ -3,7 +3,7 @@
 Набор включает в себя:
 
 1. [RestControllerAdvice Bean для обработки часто встречающихся исключений](https://github.com/realimp/rest-utils/wiki/Quick-Start)
-2. [Исключение для формрование ответов API с определенныи статусом](https://github.com/realimp/rest-utils/wiki/ApiException)
+2. [Исключение для формирования ответов API с определенным статусом](https://github.com/realimp/rest-utils/wiki/ApiException)
 3. [Набор аннотаций для Swagger | OpenAPI, описывающие основные варианты HTTP ответов](https://github.com/realimp/rest-utils/wiki/Аннотации-для-Swagger-%7C-OpenApi)
 
 ## Quick start
@@ -14,11 +14,11 @@
 <dependency>
     <groupId>pro.nikolaev</groupId>
     <artifactId>rest-utils</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.4</version>
 </dependency>
 ```
 
-После чего обработка исключений с использованием RestControllerAdvice включается добавлением аннотации 
+После чего обработка исключений с использованием `RestControllerAdvice` включается добавлением аннотации 
 `@EnableRestExceptionHandler` к любому классу конфигурации или основному классу приложения:
 
 ```java

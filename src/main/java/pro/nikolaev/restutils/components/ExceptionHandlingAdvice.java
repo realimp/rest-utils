@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 the original author or authors.
+ * Copyright (c) 2023-2024 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,13 +26,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.authentication.AccountExpiredException;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.LockedException;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.unit.DataSize;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -60,8 +53,7 @@ import java.text.MessageFormat;
  */
 @RestControllerAdvice
 public class ExceptionHandlingAdvice {
-    private static final String BAD_REQUEST = "Некорректный запрос",
-            UNAUTHORIZED = "Не авторизован";
+    private static final String BAD_REQUEST = "Некорректный запрос";
     private final Logger logger = LoggerFactory.getLogger(ExceptionHandlingAdvice.class);
     private final long maxFileSize;
     private final long maxRequestSize;
@@ -88,92 +80,6 @@ public class ExceptionHandlingAdvice {
     public ResponseEntity<ApiError> handleApiException(ApiException e) {
         return ResponseEntity.status(e.getStatus()).header(HttpHeaders.CONNECTION, "Close")
                 .contentType(MediaType.APPLICATION_JSON).body(new ApiError(e.getReason(), e.getMessage()));
-    }
-
-    /**
-     * {@link ExceptionHandler} to handle {@link BadCredentialsException},
-     * and {@link UsernameNotFoundException} exceptions.
-     *
-     * @param ignored {@link AuthenticationException} to be processed by {@link ExceptionHandler}
-     * @return {@link ResponseEntity ResponseEntity} with HTTP status 401,
-     * {@literal "Не авторизован"} message,
-     * {@literal "Не верный логин или пароль"} in {@code details} part of the body
-     * and {@code Connection: Close} header
-     * @see ExceptionHandler
-     * @see AuthenticationException
-     * @see BadCredentialsException
-     * @see UsernameNotFoundException
-     * @see ResponseEntity
-     * @since 1.0
-     */
-    @ExceptionHandler(value = {BadCredentialsException.class, UsernameNotFoundException.class})
-    public ResponseEntity<ApiError> handleBadCredentials(AuthenticationException ignored) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).header(HttpHeaders.CONNECTION, "Close")
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(new ApiError(UNAUTHORIZED, "Не верный логин или пароль"));
-    }
-
-    /**
-     * {@link ExceptionHandler} to handle any {@link AuthenticationException} except
-     * of {@link BadCredentialsException}, {@link UsernameNotFoundException},
-     * {@link AccountExpiredException}, {@link DisabledException} and {@link LockedException}.
-     *
-     * @param e {@link AuthenticationException} to be processed by {@link ExceptionHandler}
-     * @return {@link ResponseEntity ResponseEntity} with HTTP status 401,
-     * {@literal "Не авторизован"} message,
-     * exception message in {@code details} part of the body
-     * and {@code Connection: Close} header
-     * @see ExceptionHandler
-     * @see AuthenticationException
-     * @see ResponseEntity
-     * @since 1.0
-     */
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ApiError> handel401(AuthenticationException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).header(HttpHeaders.CONNECTION, "Close")
-                .contentType(MediaType.APPLICATION_JSON).body(new ApiError(UNAUTHORIZED, e.getMessage()));
-    }
-
-    /**
-     * {@link ExceptionHandler} to handle {@link AccountExpiredException},
-     * {@link DisabledException} and {@link LockedException} exceptions.
-     *
-     * @param e {@link AuthenticationException} to be processed by {@link ExceptionHandler}
-     * @return {@link ResponseEntity ResponseEntity} with HTTP status 423,
-     * {@literal "Заблокировано"} message,
-     * exception message in {@code details} part of the body
-     * and {@code Connection: Close} header
-     * @see ExceptionHandler
-     * @see AuthenticationException
-     * @see AccountExpiredException
-     * @see DisabledException
-     * @see LockedException
-     * @see ResponseEntity
-     * @since 1.0
-     */
-    @ExceptionHandler(value = {AccountExpiredException.class, DisabledException.class, LockedException.class})
-    public ResponseEntity<ApiError> handle423(AuthenticationException e) {
-        return ResponseEntity.status(HttpStatus.LOCKED).header(HttpHeaders.CONNECTION, "Close")
-                .contentType(MediaType.APPLICATION_JSON).body(new ApiError("Заблокировано", e.getMessage()));
-    }
-
-    /**
-     * {@link ExceptionHandler} to handle {@link AccessDeniedException}.
-     *
-     * @param e {@link AccessDeniedException} to be processed by {@link ExceptionHandler}
-     * @return {@link ResponseEntity ResponseEntity} with HTTP status 403,
-     * {@literal "Доступ запрещен"} message,
-     * exception message in {@code details} part of the body
-     * and {@code Connection: Close} header
-     * @see ExceptionHandler
-     * @see AccessDeniedException
-     * @see ResponseEntity
-     * @since 1.0
-     */
-    @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<ApiError> handle403(AccessDeniedException e) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).header(HttpHeaders.CONNECTION, "Close")
-                .contentType(MediaType.APPLICATION_JSON).body(new ApiError("Доступ запрещен", e.getMessage()));
     }
 
     /**

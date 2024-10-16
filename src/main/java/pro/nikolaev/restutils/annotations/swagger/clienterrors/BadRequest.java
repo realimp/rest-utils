@@ -36,7 +36,7 @@ import java.lang.annotation.*;
  * {@link ResponseBody @ResponseBody} description and example will be generated
  * according to {@link ApiError} schema description and example.
  *
- * <p><b>NOTE:</b> {@code @OkWithResource} is processed if annotated method
+ * <p><b>NOTE:</b> {@code @BadRequest} is processed if annotated method
  * is part of properly configured {@link RestController} and
  * <a href="https://springdoc.org">{@code springdoc-openapi}</a> library.
  *

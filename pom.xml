@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>pro.nikolaev</groupId>
     <artifactId>rest-utils</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -35,38 +35,29 @@
 
     <properties>
         <java.version>17</java.version>
-        <swagger-core-jakarta.version>2.2.22</swagger-core-jakarta.version>
-        <spring-security-core.version>6.3.2</spring-security-core.version>
-        <spring-webmvc.version>6.1.12</spring-webmvc.version>
-        <tomcat-embed-core.version>10.1.28</tomcat-embed-core.version>
+        <swagger-core-jakarta.version>2.2.23</swagger-core-jakarta.version>
+        <spring-webmvc.version>6.1.13</spring-webmvc.version>
+        <tomcat-embed-core.version>10.1.31</tomcat-embed-core.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring-security-core.version}</version>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-crypto</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.micrometer</groupId>
-                    <artifactId>micrometer-commons</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.micrometer</groupId>
-                    <artifactId>micrometer-observation</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring-webmvc.version}</version>
             <scope>compile</scope>
             <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-expression</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-jcl</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>io.micrometer</groupId>
                     <artifactId>micrometer-commons</artifactId>
