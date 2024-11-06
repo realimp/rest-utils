@@ -2,9 +2,9 @@
 
 Набор включает в себя:
 
-1. [RestControllerAdvice Bean для обработки часто встречающихся исключений](https://github.com/realimp/rest-utils/wiki/Quick-Start)
-2. [Исключение для формирования ответов API с определенным статусом](https://github.com/realimp/rest-utils/wiki/ApiException)
-3. [Набор аннотаций для Swagger | OpenAPI, описывающие основные варианты HTTP ответов](https://github.com/realimp/rest-utils/wiki/Аннотации-для-Swagger-%7C-OpenApi)
+1. [RestControllerAdvice Bean для обработки часто встречающихся исключений](https://gitverse.ru/realimp/rest-utils/wiki/WIKIRSTTLS-1)
+2. [Исключение для формирования ответов API с определенным статусом](https://gitverse.ru/realimp/rest-utils/wiki/WIKIRSTTLS-2)
+3. [Набор аннотаций для Swagger | OpenAPI, описывающие основные варианты HTTP ответов](https://gitverse.ru/realimp/rest-utils/wiki/WIKIRSTTLS-3)
 
 ## Quick start
 
@@ -14,7 +14,7 @@
 <dependency>
     <groupId>pro.nikolaev</groupId>
     <artifactId>rest-utils</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 

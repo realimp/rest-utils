@@ -26,6 +26,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.util.unit.DataSize;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -308,5 +309,25 @@ public class ExceptionHandlingAdvice {
         return ResponseEntity.internalServerError().header(HttpHeaders.CONNECTION, "Close")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ApiError("Внутренняя ошибка приложения", e.getMessage()));
+    }
+
+    /**
+     * {@link ExceptionHandler} to handle {@link AccessDeniedException}.
+     *
+     * @param e {@link AccessDeniedException} to be processed by {@link ExceptionHandler}
+     * @return {@link ResponseEntity ResponseEntity} with HTTP status 403,
+     * {@literal "Доступ запрещен"} message,
+     * resource path in {@code details} part of the body
+     * and {@code Connection: Close} header
+     * @see ExceptionHandler
+     * @see AccessDeniedException
+     * @see ResponseEntity
+     * @since 1.0.5
+     */
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ApiError> handle403(AccessDeniedException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).header(HttpHeaders.CONNECTION, "Close")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ApiError("Доступ запрещен", e.getMessage()));
     }
 }
