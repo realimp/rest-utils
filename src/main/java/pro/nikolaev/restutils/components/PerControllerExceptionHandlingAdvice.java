@@ -17,9 +17,12 @@
 package pro.nikolaev.restutils.components;
 
 import jakarta.servlet.MultipartConfigElement;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pro.nikolaev.restutils.annotations.RestExceptionHandler;
 
+@Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice(annotations = RestExceptionHandler.class)
 public class PerControllerExceptionHandlingAdvice extends ExceptionHandlingAdvice {
     public PerControllerExceptionHandlingAdvice(MultipartConfigElement multipartConfigElement) {
