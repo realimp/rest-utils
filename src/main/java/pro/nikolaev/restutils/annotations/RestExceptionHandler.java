@@ -20,15 +20,15 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pro.nikolaev.restutils.components.ExceptionHandlingAdvice;
+import pro.nikolaev.restutils.components.PerControllerExceptionHandlingAdvice;
 import pro.nikolaev.restutils.dto.ApiError;
 
 import java.lang.annotation.*;
 
 /**
  * A convenience annotation that creates a bean annotated with
- * {@link RestControllerAdvice @RestControllerAdvice} to globally handle
- * controller exceptions.
+ * {@link RestControllerAdvice @RestControllerAdvice} that
+ * will only handle exceptions in controllers annotated with this annotation.
  *
  * <p>Types that carry this annotation are treated as controller advice where
  * {@link ExceptionHandler @ExceptionHandler} methods use
@@ -41,7 +41,7 @@ import java.lang.annotation.*;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import(ExceptionHandlingAdvice.class)
+@Import(PerControllerExceptionHandlingAdvice.class)
 @Documented
-public @interface EnableRestExceptionHandler {
+public @interface RestExceptionHandler {
 }

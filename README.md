@@ -14,7 +14,7 @@
 <dependency>
     <groupId>pro.nikolaev</groupId>
     <artifactId>rest-utils</artifactId>
-    <version>1.0.5</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -22,6 +22,8 @@
 `@EnableRestExceptionHandler` к любому классу конфигурации или основному классу приложения:
 
 ```java
+import pro.nikolaev.restutils.annotations.EnableRestExceptionHandler;
+
 @EnableRestExceptionHandler
 @SpringBootApplication
 public class RestUtilsApplication {
@@ -37,5 +39,19 @@ public class RestUtilsApplication {
 {
   "message": "Сообщение об ошибке",
   "details": "Детали ошибки, если присутствуют"
+}
+```
+
+Так же есть возможность более тонкой настройки - обработка ошибок только для выбранных контроллеров.
+Для этого вместо аннотации `@EnableRestExceptionHandler` нужно использовать аннотация `RestExceptionHandler`,
+которая добавляется непосредственно к контроллеру, в котором нужно включить обработку ошибок.
+
+```java
+import pro.nikolaev.restutils.annotations.RestExceptionHandler;
+
+@RestController
+@RestExceptionHandler
+public class SomeController{
+    
 }
 ```
