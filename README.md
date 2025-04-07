@@ -14,7 +14,7 @@
 <dependency>
     <groupId>pro.nikolaev</groupId>
     <artifactId>rest-utils</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
 </dependency>
 ```
 
@@ -43,7 +43,7 @@ public class RestUtilsApplication {
 ```
 
 Так же есть возможность более тонкой настройки - обработка ошибок только для выбранных контроллеров.
-Для этого вместо аннотации `@EnableRestExceptionHandler` нужно использовать аннотация `RestExceptionHandler`,
+Для этого вместо аннотации `@EnableRestExceptionHandler` нужно использовать аннотацию `RestExceptionHandler`,
 которая добавляется непосредственно к контроллеру, в котором нужно включить обработку ошибок.
 
 ```java
